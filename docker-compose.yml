@@ -1,0 +1,18 @@
+version: '3.4'
+
+x-globalenvs: &globalenvs
+  GlobalEnv: "Test"
+
+services:
+  test:
+    image: ${DOCKER_REGISTRY}test
+    build:
+      context: .
+      dockerfile: src/Test/Dockerfile   
+    environment:
+      <<: *globalenvs
+    labels: &label-anchor
+      test: test
+    deploy:
+      labels:
+        <<: *label-anchor
